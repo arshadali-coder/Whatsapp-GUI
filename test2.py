@@ -3,7 +3,7 @@ import json
 import time
 
 # === CONFIGURATION ===
-API_KEY = "your_perplexity_api_key"  # Replace with your key
+API_KEY = "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"  # Replace with your key
 INPUT_JSON = "whatsapp_data.json"    # Your input file
 OUTPUT_JSON = "cleaned_whatsapp_data.json"
 
