@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Chat Viewer</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.welcome-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.welcome-content {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.whatsapp-icon {
+    font-size: 48px;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    color: #25d366;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.subtitle {
+    color: #667781;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.features {
+    margin-bottom: 40px;
+}
+
+.features h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid #25d366;
+}
+
+.feature-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.feature-item h3 {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.feature-item p {
+    color: #667781;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.upload-section {
+    text-align: center;
+}
+
+.upload-section h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.upload-section > p {
+    color: #667781;
+    margin-bottom: 30px;
+}
+
+.upload-area {
+    border: 2px dashed #25d366;
+    border-radius: 12px;
+    padding: 40px 20px;
+    margin-bottom: 30px;
+    background: #f0fcf5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    background: #e8f5e8;
+    border-color: #128c7e;
+}
+
+.upload-area.dragover {
+    background: #d4f2e7;
+    border-color: #128c7e;
+    transform: scale(1.02);
+}
+
+.upload-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.upload-content h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.upload-content p {
+    color: #667781;
+}
+
+.browse-link {
+    color: #25d366;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.loading-section {
+    padding: 40px;
+    text-align: center;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #25d366;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.instructions {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.instructions h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.instructions ol {
+    color: #667781;
+    line-height: 1.6;
+    padding-left: 20px;
+}
+
+.instructions li {
+    margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+    .welcome-content {
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .logo {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    .feature-list {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <div class="welcome-content">
+            <div class="header">
+                <div class="logo">
+                    <div class="whatsapp-icon">💬</div>
+                    <h1>WhatsApp Chat Viewer</h1>
+                </div>
+                <p class="subtitle">View your exported WhatsApp chats in a beautiful interface</p>
+            </div>
+
+            <div class="features">
+                <h2>What does this do?</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">📱</span>
+                        <div>
+                            <h3>Upload WhatsApp Export</h3>
+                            <p>Import your exported WhatsApp chat zip file</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💬</span>
+                        <div>
+                            <h3>Beautiful Chat Interface</h3>
+                            <p>View your chats in WhatsApp's familiar interface</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📅</span>
+                        <div>
+                            <h3>Organized by Date</h3>
+                            <p>Messages grouped by dates with notifications</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🔒</span>
+                        <div>
+                            <h3>Privacy First</h3>
+                            <p>Your chats are processed locally and securely</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="upload-section">
+                <h2>Get Started</h2>
+                <p>Upload your WhatsApp chat export file to begin viewing</p>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <div class="upload-icon">📁</div>
+                        <h3>Drop your WhatsApp export file here</h3>
+                        <p>or <span class="browse-link">click to browse</span></p>
+                        <input type="file" id="fileInput" accept=".zip,.txt" hidden>
+                    </div>
+                </div>
+
+                <div class="loading-section" id="loadingSection" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Processing your chat export...</p>
+                </div>
+
+                <div class="instructions">
+                    <h3>How to export from WhatsApp:</h3>
+                    <ol>
+                        <li>Open WhatsApp and go to the chat you want to export</li>
+                        <li>Tap the three dots menu → More → Export chat</li>
+                        <li>Choose "Without Media" or "Include Media"</li>
+                        <li>Save the zip file and upload it here</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class WhatsAppUploader {
+    constructor() {
+        this.uploadArea = document.getElementById('uploadArea');
+        this.fileInput = document.getElementById('fileInput');
+        this.loadingSection = document.getElementById('loadingSection');
+        this.init();
+    }
+
+    init() {
+        // Click to browse
+        this.uploadArea.addEventListener('click', () => {
+            this.fileInput.click();
+        });
+
+        // File input change
+        this.fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                this.handleFile(e.target.files[0]);
+            }
+        });
+
+        // Drag and drop
+        this.uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            this.uploadArea.classList.add('dragover');
+        });
+
+        this.uploadArea.addEventListener('dragleave', () => {
+            this.uploadArea.classList.remove('dragover');
+        });
+
+        this.uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            this.uploadArea.classList.remove('dragover');
+            
+            if (e.dataTransfer.files.length > 0) {
+                this.handleFile(e.dataTransfer.files[0]);
+            }
+        });
+    }
+
+    async handleFile(file) {
+        if (!this.validateFile(file)) {
+            return;
+        }
+
+        try {
+            this.showLoading();
+            const chatData = await this.uploadToBackend(file);
+            this.redirectToChat(chatData);
+        } catch (error) {
+            this.showError('Error processing file: ' + error.message);
+        }
+    }
+
+    validateFile(file) {
+        const validTypes = ['application/zip', 'text/plain', 'application/x-zip-compressed'];
+        const maxSize = 50 * 1024 * 1024; // 50MB
+
+        if (!validTypes.includes(file.type) && !file.name.endsWith('.zip') && !file.name.endsWith('.txt')) {
+            this.showError('Please upload a valid WhatsApp export file (.zip or .txt)');
+            return false;
+        }
+
+        if (file.size > maxSize) {
+            this.showError('File size too large. Please upload a file smaller than 50MB.');
+            return false;
+        }
+
+        return true;
+    }
+
+    async uploadToBackend(file) {
+        const formData = new FormData();
+        formData.append('whatsapp_export', file);
+
+        const response = await fetch('http://localhost:5000/upload-whatsapp', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result;
+    }
+
+    showLoading() {
+        this.uploadArea.style.display = 'none';
+        this.loadingSection.style.display = 'block';
+    }
+
+    redirectToChat(chatData) {
+        // Store chat data in sessionStorage
+        sessionStorage.setItem('whatsappChatData', JSON.stringify(chatData));
+        
+        // Redirect to chat viewer
+        window.location.href = '/chat';
+    }
+
+    showError(message) {
+        this.loadingSection.style.display = 'none';
+        this.uploadArea.style.display = 'block';
+        
+        alert(message); // Replace with better error UI if needed
+    }
+}
+
+// Initialize the uploader
+document.addEventListener('DOMContentLoaded', function() {
+    new WhatsAppUploader();
+});
+    </script>
+</body>
+</html>

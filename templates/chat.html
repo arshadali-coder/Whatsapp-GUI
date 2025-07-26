@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Group Chat</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>WhatsApp Chat Viewer</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="whatsapp-container">
         <!-- Header -->
         <div class="chat-header">
             <div class="header-left">
-                <button class="back-btn">←</button>
+                <button class="back-btn" onclick="goBack()">←</button>
                 <div class="group-avatar">
                     <img src="https://via.placeholder.com/40/25D366/FFFFFF?text=G" alt="Group">
                 </div>
                 <div class="header-info">
-                    <h3 class="group-name">Family Group</h3>
-                    <p class="group-status">John, Sarah, Mike, +5 more</p>
+                    <h3 class="group-name" id="groupName">Loading...</h3>
+                    <p class="group-status" id="groupStatus">Loading participants...</p>
                 </div>
             </div>
             <div class="header-right">
@@ -29,19 +29,21 @@
 
         <!-- Chat Messages -->
         <div class="chat-messages" id="chatMessages">
-            <!-- Date header will be added here -->
-            <!-- System notifications and messages will be inserted here -->
+            <div class="loading-chat">
+                <div class="spinner"></div>
+                <p>Loading your chat...</p>
+            </div>
         </div>
 
         <!-- Message Input -->
         <div class="message-input">
             <button class="attach-btn">📎</button>
-            <input type="text" placeholder="Type a message" class="message-field">
+            <input type="text" placeholder="Type a message" class="message-field" disabled>
             <button class="emoji-btn">😊</button>
             <button class="send-btn">➤</button>
         </div>
     </div>
 
-    <script src="/static/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
